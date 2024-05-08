@@ -59,6 +59,10 @@ echo "$htmlTmpleate" > src/index.html
 # create scripts.js
 mkdir -p src/js
 
+# if not exist 
+
+if [ ! -f src/js/scripts.js ]; then
+
 echo "
 import * as THREE from 'three'
 
@@ -69,6 +73,8 @@ document.body.appendChild(renderer.domElement)
 
 
 " > src/js/scripts.js
+
+fi  # end if not  scripts.js
 
 # now install three.js if not exists
 if [ ! -d node_modules/three ]; then
