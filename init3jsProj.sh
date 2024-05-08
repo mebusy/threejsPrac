@@ -35,6 +35,8 @@ if [ ! -d node_modules/parcel ]; then
   npm install --save-dev parcel
 fi
 
+mkdir -p src
+
 # create index.html
 htmlTmpleate='
 <!doctype html>
@@ -49,10 +51,10 @@ htmlTmpleate='
   </body>
 </html>
 '
-echo "$htmlTmpleate" > index.html
+echo "$htmlTmpleate" > src/index.html
 
 # create scripts.js
-mkdir -p js
+mkdir -p src/js
 
 echo "
 import * as THREE from 'three';
@@ -63,7 +65,7 @@ render.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
 
-" > js/scripts.js
+" > src/js/scripts.js
 
 # now install three.js if not exists
 if [ ! -d node_modules/three ]; then
