@@ -9,3 +9,8 @@
 
 - 3js use **right-hand coordinate system** (x: right, y: up, z: forward)
 
+## Material
+
+- MeshBasicMaterial
+    - A material for drawing geometries in a simple shaded (flat or wireframe) way. 
+    - This material is not affected by lights, that is, it doesn't need light to appear.
