@@ -21,9 +21,12 @@ const box = new THREE.Mesh(boxGeometry, boxMaterial)
 scene.add(box)
 
 // animation
+let prevTime = performance.now()
 function animate(time) {
-  box.rotation.x += time / 1000
-  box.rotation.y += time / 1000
+  const delta = time - prevTime
+  prevTime = time
+  box.rotation.x += delta / 1000
+  box.rotation.y += delta / 1000
   renderer.render(scene, camera)
 }
 renderer.setAnimationLoop(animate)
