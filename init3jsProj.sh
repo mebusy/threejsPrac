@@ -12,13 +12,11 @@ fi
 # if not exists .gitingore, download Node.gitignore
 if [ ! -f .gitignore ]; then
     wget https://raw.githubusercontent.com/github/gitignore/main/Node.gitignore -O .gitignore
+    # append .DS_Store to .gitignore
+    echo ".DS_Store" >> .gitignore
+    # append *.swp to .gitignore
+    echo "*.swp" >> .gitignore
 fi
-
-
-# append .DS_Store to .gitignore
-echo ".DS_Store" >> .gitignore
-# append *.swp to .gitignore
-echo "*.swp" >> .gitignore
 
 # create project directory
 mkdir -p $projectName
@@ -70,5 +68,11 @@ document.body.appendChild(renderer.domElement);
 # now install three.js if not exists
 if [ ! -d node_modules/three ]; then
   npm install three
+fi
+
+# add a script to package.json
+# "start": "parcel src/index.html" if not exists
+if ! grep -q '"start": "parcel src/index.html"' package.json; then
+  sed -i '' 's/"scripts": {/"scripts": {\n    "start": "parcel src\/index.html",/' package.json
 fi
 
