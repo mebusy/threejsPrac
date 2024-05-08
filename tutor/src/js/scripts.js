@@ -61,6 +61,7 @@ scene.add(sphere)
 const options = {
   sphereColor: sphereMaterial.color,
   wireframe: sphereMaterial.wireframe,
+  speed: 0.01,
 }
 gui.addColor(options, 'sphereColor').onChange((color) => {
   sphereMaterial.color.set(color)
@@ -68,10 +69,12 @@ gui.addColor(options, 'sphereColor').onChange((color) => {
 gui.add(options, 'wireframe').onChange((wireframe) => {
   sphereMaterial.wireframe = wireframe
 })
+gui.add(options, 'speed', 0, 0.1).onChange((speed) => {
+  speed = speed
+})
 
 // sphere bouncing
 let step = 0
-let speed = 0.01
 
 // animation
 let prevTime = performance.now()
@@ -84,7 +87,7 @@ function animate(time) {
   box.rotation.x += delta / 1000
   box.rotation.y += delta / 1000
 
-  step += speed
+  step += options.speed
   sphere.position.y = Math.abs(10 * Math.sin(step))
 
   renderer.render(scene, camera)
