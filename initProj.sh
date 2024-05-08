@@ -19,3 +19,12 @@ echo "*.swp" >> .gitignore
 
 # create project directory
 mkdir -p $projectName
+
+cd $projectName
+
+# if not exist package.json, npm init
+if [ ! -f package.json ]; then
+  npm init -y
+fi
+
+
