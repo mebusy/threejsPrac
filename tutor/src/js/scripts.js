@@ -20,9 +20,6 @@ camera.position.set(-10, 30, 30)
 const stats = Stats()
 document.body.appendChild(stats.dom)
 
-// gui
-gui = new GUI()
-
 // orbit controls
 const orbit = new OrbitControls(camera, renderer.domElement)
 orbit.update()
@@ -40,7 +37,7 @@ scene.add(box)
 // add a plane
 const planeGeometry = new THREE.PlaneGeometry(30, 30)
 // plane normally be DoubleSide, so we can see it from both sides
-const planeMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff, side: THREE.DoubleSide })
+const planeMaterial = new THREE.MeshStandardMaterial({ color: 0xffffff, side: THREE.DoubleSide })
 const plane = new THREE.Mesh(planeGeometry, planeMaterial)
 // set it horizontal
 plane.rotation.x = -Math.PI / 2
@@ -52,11 +49,26 @@ scene.add(gridHelper)
 
 // shpere, and show its wireframe, and eventually set it false
 const sphereGeometry = new THREE.SphereGeometry(4, 50, 50)
-const sphereMaterial = new THREE.MeshBasicMaterial({ color: 0x0000ff, wireframe: false })
+const sphereMaterial = new THREE.MeshStandardMaterial({ color: 0x0000ff, wireframe: false })
 // const sphereMaterial = new THREE.MeshLambertMaterial({ color: 0x0000ff, wireframe: false })
 const sphere = new THREE.Mesh(sphereGeometry, sphereMaterial)
 sphere.position.set(-10, 10, 0)
 scene.add(sphere)
+
+// light
+const ambientLight = new THREE.AmbientLight(0x333333)
+scene.add(ambientLight)
+
+const directionalLight = new THREE.DirectionalLight(0xffffff, 3.5)
+scene.add(directionalLight)
+directionalLight.position.set(-30, 50, 0)
+
+// light helper
+const dLightHelper = new THREE.DirectionalLightHelper(directionalLight, 5) // 5: size of helper
+scene.add(dLightHelper)
+
+// gui
+gui = new GUI()
 
 const options = {
   sphereColor: sphereMaterial.color,
