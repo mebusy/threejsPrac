@@ -60,12 +60,12 @@ echo "$htmlTmpleate" > src/index.html
 mkdir -p src/js
 
 echo "
-import * as THREE from 'three';
+import * as THREE from 'three'
 
-const renderer = new THREE.WebGLRenderer();
+const renderer = new THREE.WebGLRenderer()
 
-renderer.setSize(window.innerWidth, window.innerHeight);
-document.body.appendChild(renderer.domElement);
+renderer.setSize(window.innerWidth, window.innerHeight)
+document.body.appendChild(renderer.domElement)
 
 
 " > src/js/scripts.js
