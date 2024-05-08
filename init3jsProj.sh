@@ -56,4 +56,8 @@ mkdir -p js
 
 echo '' > js/scripts.js
 
+# now install three.js if not exists
+if [ ! -d node_modules/three ]; then
+  npm install three
+fi
 
