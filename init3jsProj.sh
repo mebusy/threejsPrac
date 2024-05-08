@@ -54,7 +54,16 @@ echo "$htmlTmpleate" > index.html
 # create scripts.js
 mkdir -p js
 
-echo '' > js/scripts.js
+echo "
+import * as THREE from 'three';
+
+const renderer = new THREE.WebGLRenderer();
+
+render.setSize(window.innerWidth, window.innerHeight);
+document.body.appendChild(renderer.domElement);
+
+
+" > js/scripts.js
 
 # now install three.js if not exists
 if [ ! -d node_modules/three ]; then
