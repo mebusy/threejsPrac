@@ -59,9 +59,12 @@ scene.add(sphere)
 const ambientLight = new THREE.AmbientLight(0x333333)
 scene.add(ambientLight)
 
-const directionalLight = new THREE.DirectionalLight(0xffffff, 3.5)
+// light intensity are not internally scaled by factor PI anymore
+const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8 * Math.PI)
 scene.add(directionalLight)
 directionalLight.position.set(-30, 50, 0)
+// TODO  Point and spot lights now decay in physically correct ways.
+// https://discourse.threejs.org/t/updates-to-lighting-in-three-js-r155/53733
 
 // light helper
 const dLightHelper = new THREE.DirectionalLightHelper(directionalLight, 5) // 5: size of helper
