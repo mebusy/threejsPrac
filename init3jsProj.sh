@@ -83,7 +83,7 @@ fi
 
 # add a script to package.json
 # "start": "parcel src/index.html" if not exists
-if ! grep -q '"start": "parcel src/index.html"' package.json; then
-  sed -i '' 's/"scripts": {/"scripts": {\n    "start": "parcel src\/index.html",/' package.json
+if ! grep -q '"start": ' package.json; then
+  sed -i '' 's/"scripts": {/"scripts": {\n    "start": "rm -rf .parcel-cache && parcel src\/index.html",/' package.json
 fi
 
