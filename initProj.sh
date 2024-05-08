@@ -9,8 +9,11 @@ if [ -z "$projectName" ]; then
   exit 1
 fi
 
-# https://raw.githubusercontent.com/github/gitignore/main/Node.gitignore > .gitignore
-wget https://raw.githubusercontent.com/github/gitignore/main/Node.gitignore -O .gitignore
+# if not exists .gitingore, download Node.gitignore
+if [ ! -f .gitignore ]; then
+    wget https://raw.githubusercontent.com/github/gitignore/main/Node.gitignore -O .gitignore
+fi
+
 
 # append .DS_Store to .gitignore
 echo ".DS_Store" >> .gitignore
@@ -27,4 +30,8 @@ if [ ! -f package.json ]; then
   npm init -y
 fi
 
+# install parcel for development
+if [ ! -d node_modules/parcel ]; then
+  npm install --save-dev parcel
+fi
 
