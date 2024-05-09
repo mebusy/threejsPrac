@@ -151,6 +151,26 @@ const plane2 = new THREE.Mesh(plane2Geometry, plane2Material)
 scene.add(plane2)
 plane2.position.set(10, 10, 15)
 
+// shader
+const sphere2Geometry = new THREE.SphereGeometry(4)
+const sphere2Material = new THREE.ShaderMaterial({
+  vertexShader: `
+        varying vec3 vNormal;
+        void main() {
+        vNormal = normal;
+        gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+        }
+    `,
+  fragmentShader: `
+        varying vec3 vNormal;
+        void main() {
+        gl_FragColor = vec4(vNormal, 1.0);
+        }
+    `,
+})
+const sphere2 = new THREE.Mesh(sphere2Geometry, sphere2Material)
+scene.add(sphere2)
+
 // gui
 gui = new GUI()
 
@@ -176,6 +196,8 @@ gui.add(options, 'speed', 0, 0.1).onChange((speed) => {
 // spot light
 gui.add(options, 'angle', 0, 1).onChange((angle) => {
   spotLight.angle = angle
+  // update light helper
+  sLightHelper.update()
 })
 gui.add(options, 'penumbra', 0, 1).onChange((penumbra) => {
   spotLight.penumbra = penumbra
