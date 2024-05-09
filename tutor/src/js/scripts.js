@@ -1,10 +1,4 @@
 import * as THREE from 'three'
-// OrbitControls
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
-// GUI
-import { GUI } from 'three/examples/jsm/libs/lil-gui.module.min.js'
-// fps
-import Stats from 'three/examples/jsm/libs/stats.module.js'
 
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 
@@ -16,18 +10,15 @@ import stars from '../img/stars.jpg'
 const monkeyUrl = new URL('../assets/monkey.glb', import.meta.url)
 
 // scene and camera
-import { scene, camera, renderer } from './render.js'
+import { scene, camera, renderer, useStats, useOrbit, useGui, addCustomAnimate } from './render.js'
+
+// orbit
+useOrbit()
+// stats
+useStats()
 
 // shadow 1: enable renderer shadow map
 renderer.shadowMap.enabled = true
-
-// stats
-const stats = Stats()
-document.body.appendChild(stats.dom)
-
-// orbit controls
-const orbit = new OrbitControls(camera, renderer.domElement)
-orbit.update()
 
 // show axis
 const axesHelper = new THREE.AxesHelper(5)
@@ -184,7 +175,7 @@ gltfLoader.load(
 )
 
 // gui
-gui = new GUI()
+const gui = useGui()
 
 const options = {
   // for sphere
@@ -233,13 +224,7 @@ box2.name = 'theBox'
 let step = 0
 
 // animation
-let prevTime = performance.now()
-function animate(time) {
-  const delta = time - prevTime
-  prevTime = time
-
-  stats.update()
-
+function animate(delta) {
   box.rotation.x += delta / 1000
   box.rotation.y += delta / 1000
 
@@ -267,14 +252,6 @@ function animate(time) {
   plane2.geometry.attributes.position.array[2] = 10 * Math.random()
   // important !!!
   plane2.geometry.attributes.position.needsUpdate = true
-
-  renderer.render(scene, camera)
 }
-renderer.setAnimationLoop(animate)
 
-// resize event
-window.addEventListener('resize', () => {
-  camera.aspect = window.innerWidth / window.innerHeight
-  camera.updateProjectionMatrix()
-  renderer.setSize(window.innerWidth, window.innerHeight)
-})
+addCustomAnimate(animate)
