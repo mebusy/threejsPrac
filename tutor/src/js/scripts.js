@@ -6,6 +6,10 @@ import { GUI } from 'three/examples/jsm/libs/lil-gui.module.min.js'
 // fps
 import Stats from 'three/examples/jsm/libs/stats.module.js'
 
+// use import directive to load resource, so that bundle tool can handle it
+import nebula from '../img/nebula.jpg'
+import stars from '../img/stars.jpg'
+
 // renderer
 const renderer = new THREE.WebGLRenderer()
 renderer.setSize(window.innerWidth, window.innerHeight)
@@ -110,7 +114,15 @@ scene.add(sLightHelper)
 scene.fog = new THREE.FogExp2(0xffffff, 0.01) // go exponentially with distance to camera
 
 // bg color
-renderer.setClearColor(0x203020)
+// renderer.setClearColor(0x203020)
+
+// load image
+const textureLoader = new THREE.TextureLoader()
+// scene.background = textureLoader.load(stars)
+
+// 3d background
+const cubeTextureLoader = new THREE.CubeTextureLoader()
+scene.background = cubeTextureLoader.load([nebula, nebula, stars, stars, stars, stars])
 
 // gui
 gui = new GUI()

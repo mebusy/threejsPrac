@@ -31,3 +31,7 @@
         - you may need to adjust the shadow camera's properties, e.g. `directionalLight.shadow.camera.bottom = -12`
 
 
+## Project Resource
+
+- use `import` directive to load resource, so that bundle tool can handle it
+    - `import nebula from '../img/nebula.jpg'`
