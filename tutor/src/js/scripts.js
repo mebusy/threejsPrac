@@ -124,6 +124,26 @@ const textureLoader = new THREE.TextureLoader()
 const cubeTextureLoader = new THREE.CubeTextureLoader()
 scene.background = cubeTextureLoader.load([nebula, nebula, stars, stars, stars, stars])
 
+// map texture to a cube
+const box2Geometry = new THREE.BoxGeometry(4, 4, 4)
+const box2Material = new THREE.MeshBasicMaterial({
+  // color: 0x00ff00,
+  map: textureLoader.load(nebula),
+})
+// const box2 = new THREE.Mesh(box2Geometry, box2Material)
+
+const multiMaterials = [
+  new THREE.MeshBasicMaterial({ map: textureLoader.load(nebula) }),
+  new THREE.MeshBasicMaterial({ map: textureLoader.load(nebula) }),
+  new THREE.MeshBasicMaterial({ map: textureLoader.load(stars) }),
+  new THREE.MeshBasicMaterial({ map: textureLoader.load(stars) }),
+  new THREE.MeshBasicMaterial({ map: textureLoader.load(stars) }),
+  new THREE.MeshBasicMaterial({ map: textureLoader.load(stars) }),
+]
+const box2 = new THREE.Mesh(box2Geometry, multiMaterials)
+scene.add(box2)
+box2.position.set(0, 15, 10)
+
 // gui
 gui = new GUI()
 
