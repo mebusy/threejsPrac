@@ -49,3 +49,7 @@ https://www.classcentral.com/course/youtube-intermediate-three-js-tutorial-creat
 - use `import` directive to load resource, so that bundle tool can handle it
     - `import nebula from '../img/nebula.jpg'`
 
+- model resource
+    - .glb model need a different way to bundle
+    - we need to create a variable that holds an instance of the url class, to tell bundle to handle it
+    - `const monkeyUrl = new URL('../assets/monkey.glb', import.meta.url)`

@@ -6,9 +6,14 @@ import { GUI } from 'three/examples/jsm/libs/lil-gui.module.min.js'
 // fps
 import Stats from 'three/examples/jsm/libs/stats.module.js'
 
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
+
 // use import directive to load resource, so that bundle tool can handle it
 import nebula from '../img/nebula.jpg'
 import stars from '../img/stars.jpg'
+
+// load model
+const monkeyUrl = new URL('../assets/monkey.glb', import.meta.url)
 
 // renderer
 const renderer = new THREE.WebGLRenderer()
@@ -170,6 +175,21 @@ const sphere2Material = new THREE.ShaderMaterial({
 })
 const sphere2 = new THREE.Mesh(sphere2Geometry, sphere2Material)
 scene.add(sphere2)
+
+// load model
+const gltfLoader = new GLTFLoader()
+gltfLoader.load(
+  monkeyUrl.href,
+  (gltf) => {
+    const model = gltf.scene
+    scene.add(model)
+    gltf.scene.position.set(-12, 4, 10)
+  },
+  undefined,
+  (error) => {
+    console.error(error)
+  }
+)
 
 // gui
 gui = new GUI()
