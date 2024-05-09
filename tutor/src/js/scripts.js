@@ -144,6 +144,13 @@ const box2 = new THREE.Mesh(box2Geometry, multiMaterials)
 scene.add(box2)
 box2.position.set(0, 15, 10)
 
+// change mesh
+const plane2Geometry = new THREE.PlaneGeometry(10, 10, 8, 8) // 10x10, and subdivision
+const plane2Material = new THREE.MeshBasicMaterial({ color: 0xffffff, wireframe: true })
+const plane2 = new THREE.Mesh(plane2Geometry, plane2Material)
+scene.add(plane2)
+plane2.position.set(10, 10, 15)
+
 // gui
 gui = new GUI()
 
@@ -219,6 +226,13 @@ function animate(time) {
       intersect.object.rotation.y += delta / 1000
     }
   }
+
+  // change the first vertex of the plane
+  plane2.geometry.attributes.position.array[0] = 10 * Math.random()
+  plane2.geometry.attributes.position.array[1] = 10 * Math.random()
+  plane2.geometry.attributes.position.array[2] = 10 * Math.random()
+  // important !!!
+  plane2.geometry.attributes.position.needsUpdate = true
 
   renderer.render(scene, camera)
 }
