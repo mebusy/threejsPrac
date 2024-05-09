@@ -105,6 +105,13 @@ spotLight.angle = Math.PI / 10
 const sLightHelper = new THREE.SpotLightHelper(spotLight)
 scene.add(sLightHelper)
 
+// fog: color, near, far
+// scene.fog = new THREE.Fog(0xffffff, 0, 100)
+scene.fog = new THREE.FogExp2(0xffffff, 0.01) // go exponentially with distance to camera
+
+// bg color
+renderer.setClearColor(0x203020)
+
 // gui
 gui = new GUI()
 
