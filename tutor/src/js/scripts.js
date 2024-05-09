@@ -279,3 +279,10 @@ function animate(time) {
   renderer.render(scene, camera)
 }
 renderer.setAnimationLoop(animate)
+
+// resize event
+window.addEventListener('resize', () => {
+  camera.aspect = window.innerWidth / window.innerHeight
+  camera.updateProjectionMatrix()
+  renderer.setSize(window.innerWidth, window.innerHeight)
+})
