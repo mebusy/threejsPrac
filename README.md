@@ -14,3 +14,20 @@
 - MeshBasicMaterial
     - A material for drawing geometries in a simple shaded (flat or wireframe) way. 
     - This material is not affected by lights, that is, it doesn't need light to appear.
+
+## Shadow
+
+- shadow is disabled by default
+- to enable shadow in threejs, you need
+    - 1. set `renderer.shadowMap.enabled = true`
+    - 2. enable object to receive shadow by setting `object.receiveShadow = true` 
+    - 3.a enable light to cast shadow by setting `light.castShadow = true`
+    - 3.b enable object to cast shadow by setting `object.castShadow = true`
+- shadow camera
+    - actually shadows in 3js use cameras internally which are the same as those we've talked about.
+    - the role of a shadow's camera is to delimit where to render the shadows, that said each type of light has a specific type of camera its shadows. Directional light, for an intance, uses OrthographicCamera, while PointLight and SpotLight use PerspectiveCamera.
+    - sometimes the shadow display is not perfect, this is because the shadow camera is not set properly.
+        - shadows out of the camera's frustum are not rendered.
+        - you may need to adjust the shadow camera's properties, e.g. `directionalLight.shadow.camera.bottom = -12`
+
+
