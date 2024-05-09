@@ -4,10 +4,23 @@
 
 # Tutor
 
+https://www.youtube.com/watch?v=xJAfLdUgdc4
+
+https://threejs.org/manual/#en/fundamentals
+
+https://www.classcentral.com/course/youtube-intermediate-three-js-tutorial-create-a-globe-with-custom-shaders-150237
+
+
+
 - parcel
     - we use parcel to bundle our code and run a local server because it zero-config, you'd may use webpack or any other bundler you like.
 
 - 3js use **right-hand coordinate system** (x: right, y: up, z: forward)
+
+## Canvas
+
+- the HTML canvas's original coordinate system, the (0,0) is on the top-left corner
+- in webgl , the values of the axes start from -1 to 1 (along the axis), so the center of the canvas is (0,0), there are called normalized device coordinates (NDC)
 
 ## Material
 
@@ -35,3 +48,4 @@
 
 - use `import` directive to load resource, so that bundle tool can handle it
     - `import nebula from '../img/nebula.jpg'`
+

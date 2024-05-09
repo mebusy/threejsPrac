@@ -177,6 +177,17 @@ gui.add(options, 'intensity', 0, 1).onChange((intensity) => {
   spotLight.intensity = intensity * Math.PI
 })
 
+// ray-cast
+const mousePosition = new THREE.Vector2(-2, -2) // init value out of screen
+window.addEventListener('mousemove', (event) => {
+  // convert to normalized device coordinates
+  mousePosition.x = (event.clientX / window.innerWidth) * 2 - 1
+  mousePosition.y = -(event.clientY / window.innerHeight) * 2 + 1
+})
+const raycaster = new THREE.Raycaster()
+
+box2.name = 'theBox'
+
 // sphere bouncing
 let step = 0
 
@@ -193,6 +204,21 @@ function animate(time) {
 
   step += options.speed
   sphere.position.y = Math.abs(10 * Math.sin(step))
+
+  // ray-cast
+  raycaster.setFromCamera(mousePosition, camera)
+  const intersects = raycaster.intersectObjects(scene.children)
+  for (const intersect of intersects) {
+    // intersect.object.material.color.set(0xff0000)
+    if (intersect.object.id === sphere.id) {
+      // console.log(intersect.object)
+      intersect.object.material.color.set(0xff0000)
+    }
+    if (intersect.object.name === 'theBox') {
+      intersect.object.rotation.x += delta / 1000
+      intersect.object.rotation.y += delta / 1000
+    }
+  }
 
   renderer.render(scene, camera)
 }
